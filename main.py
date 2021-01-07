@@ -115,7 +115,7 @@ reset_button.grid(row=2, column=3)
 mark_label = Label(fg=GREEN, bg=YELLOW, font=(FONT_NAME, 20, "bold"))
 mark_label.grid(row=3, column=1)
 
-sound_button = Button(text="🔊", font=(FONT_NAME, 10, "bold"))
+sound_button = Button(text="🔊🔇", font=(FONT_NAME, 10, "bold"))
 sound_button.grid(row=2, column=1)
 
 app.mainloop()
