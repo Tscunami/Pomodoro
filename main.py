@@ -3,19 +3,22 @@ import math
 
 cycle = 0
 timer = None
+sound = True
 
 PINK = "#ee9595"
 RED = "#ef4f4f"
 GREEN = "#3FB351"
+LIGHT_GREEN = "#00CC66"
 YELLOW = "#ffcda3"
+BLACK = "#000000"
 FONT_NAME = "Courier"
-WORK_MIN = 25
-SHORT_BREAK_MIN = 5
-LONG_BREAK_MIN = 20
+# WORK_MIN = 25
+# SHORT_BREAK_MIN = 5
+# LONG_BREAK_MIN = 20
 
-# WORK_MIN = 5
-# SHORT_BREAK_MIN = 3
-# LONG_BREAK_MIN = 4
+WORK_MIN = 5
+SHORT_BREAK_MIN = 3
+LONG_BREAK_MIN = 4
 
 
 def app_in_front():
@@ -24,7 +27,8 @@ def app_in_front():
     """
     app.attributes("-topmost", 1)
     app.attributes("-topmost", 0)
-    app.bell()
+    if sound is True:
+        app.bell()
 
 
 def reset_timer():
@@ -53,13 +57,13 @@ def start_timer():
     global cycle
     cycle += 1
 
-    work_seconds = WORK_MIN * 60
-    short_break_seconds = SHORT_BREAK_MIN * 60
-    long_break_minutes = LONG_BREAK_MIN * 60
+    # work_seconds = WORK_MIN * 60
+    # short_break_seconds = SHORT_BREAK_MIN * 60
+    # long_break_minutes = LONG_BREAK_MIN * 60
 
-    # work_seconds = WORK_MIN
-    # short_break_seconds = SHORT_BREAK_MIN
-    # long_break_minutes = LONG_BREAK_MIN
+    work_seconds = WORK_MIN
+    short_break_seconds = SHORT_BREAK_MIN
+    long_break_minutes = LONG_BREAK_MIN
 
     if cycle % 8 == 8:
         count_down(long_break_minutes)
@@ -93,6 +97,16 @@ def count_down(count):
             mark_label["text"] += "✔"
 
 
+def change_sound_state():
+    global sound
+    if sound is True:
+        sound_button.config(text="🔇", bg=PINK, fg=BLACK)
+        sound = False
+    else:
+        sound_button.config(text="🔊", bg=YELLOW, fg=BLACK)
+        sound = True
+
+
 app = Tk()
 app.title("Pomodoro")
 app.config(padx=100, pady=50, bg=YELLOW)
@@ -115,7 +129,12 @@ reset_button.grid(row=2, column=3)
 mark_label = Label(fg=GREEN, bg=YELLOW, font=(FONT_NAME, 20, "bold"))
 mark_label.grid(row=3, column=1)
 
-sound_button = Button(text="🔊🔇", font=(FONT_NAME, 10, "bold"))
-sound_button.grid(row=2, column=1)
+sound_button = Button(text="🔊",
+                      bg=YELLOW,
+                      fg=BLACK,
+                      font=(FONT_NAME, 10, "bold"),
+                      command=change_sound_state,
+                      highlightthickness=0)
+sound_button.grid(row=4, column=1)
 
 app.mainloop()
