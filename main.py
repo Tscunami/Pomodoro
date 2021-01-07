@@ -12,9 +12,9 @@ LIGHT_GREEN = "#00CC66"
 YELLOW = "#ffcda3"
 BLACK = "#000000"
 FONT_NAME = "Courier"
-WORK_MIN = 25
-SHORT_BREAK_MIN = 5
-LONG_BREAK_MIN = 20
+WORK_MIN = 5
+SHORT_BREAK_MIN = 3
+LONG_BREAK_MIN = 4
 
 
 def app_in_front():
@@ -53,9 +53,9 @@ def start_timer():
     global cycle
     cycle += 1
 
-    work_seconds = WORK_MIN * 60
-    short_break_seconds = SHORT_BREAK_MIN * 60
-    long_break_minutes = LONG_BREAK_MIN * 60
+    work_seconds = WORK_MIN
+    short_break_seconds = SHORT_BREAK_MIN
+    long_break_minutes = LONG_BREAK_MIN
 
     if cycle % 8 == 0:
         count_down(long_break_minutes)
