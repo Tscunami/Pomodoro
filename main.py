@@ -98,6 +98,9 @@ def count_down(count):
 
 
 def change_sound_state():
+    """
+    triggers when volume button is clicked, it'll mute or unmute sound notification
+    """
     global sound
     if sound is True:
         sound_button.config(text="🔇", bg=PINK, fg=BLACK)
